@@ -32,11 +32,11 @@ app.set('port', process.env.PORT || 5000);
 app.get('/radar/:id', function (req,res) {
 /* 
   const myURL = new URL('mysql2://b3f075f1d5a634:774299be@us-cdbr-iron-east-04.cleardb.net/heroku_3348c67f9d86e50?reconnect=true');
- */  
+  
    console.log(myURL.host);
    console.log(myURL.username);
    console.log(myURL.password);
-   console.log(myURL.pathname.substring(1));
+   console.log(myURL.pathname.substring(1));*/
  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
