@@ -6,6 +6,7 @@ var     http = require('http'),
 const URL = require('url').Url;
 console.log(process.env.DATABASE_URL);
 const myURL  = new URL(process.env.DATABASE_URL);
+console.log(URL.user);
 //console.log(process.env.DATABASE_URL);
 var connection = mysql.createConnection({
   host: myURL.host,
