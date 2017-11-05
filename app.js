@@ -4,11 +4,11 @@ var     http = require('http'),
 	parser   = require('body-parser');
 
 var URL = require('url');
-console.log(process.env.DATABASE_URL);
+//console.log(process.env.DATABASE_URL);
 var myURL  = URL.parse(process.env.DATABASE_URL,true);
-console.log(myURL);
+//console.log(myURL);
 var authParts = myURL.auth.split(':');
-console.log(process.env.DATABASE_URL);
+//console.log(process.env.DATABASE_URL);
 console.log(authParts[0]);
 console.log(authParts[1]);
 console.log(myURL.hostname);
