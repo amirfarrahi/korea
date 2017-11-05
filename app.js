@@ -3,7 +3,7 @@ var     http = require('http'),
 	mysql    = require('mysql')
 	parser   = require('body-parser');
 
-const { URL } = require('url');
+const URL = require('url').Url;
 console.log(process.env.DATABASE_URL);
 const myURL  = new URL(process.env.DATABASE_URL);
 //console.log(process.env.DATABASE_URL);
