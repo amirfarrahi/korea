@@ -7,11 +7,16 @@ var URL = require('url');
 console.log(process.env.DATABASE_URL);
 var myURL  = URL.parse(process.env.DATABASE_URL,true);
 console.log(myURL);
-//console.log(process.env.DATABASE_URL);
+var authParts = myURL.auth.split(':');
+console.log(process.env.DATABASE_URL);
+console.log(authParts[0]);
+console.log(authParts[1]);
+console.log(myURL.hostname);
+console.log(myURL.pathname.substring(1));
 var connection = mysql.createConnection({
-  host: myURL.host,
-  user: myURL.username,
-  password: myURL.password,
+  host: myURL.hostname,
+  user: authParts[0],
+  password: authParts[1] ,
   database : myURL.pathname.substring(1)
 });
 
