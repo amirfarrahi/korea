@@ -4,8 +4,9 @@ var     http = require('http'),
 	parser   = require('body-parser');
 
 const { URL } = require('url');
-const myURL  = new URL(process.env.DATABASE_URL);
 console.log(process.env.DATABASE_URL);
+const myURL  = new URL(process.env.DATABASE_URL);
+//console.log(process.env.DATABASE_URL);
 var connection = mysql.createConnection({
   host: myURL.host,
   user: myURL.username,
