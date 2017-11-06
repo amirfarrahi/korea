@@ -37,8 +37,8 @@ app.get('/radar/:id', function (req,res) {
    console.log(myURL.username);
    console.log(myURL.password);
    console.log(myURL.pathname.substring(1));*/
-//  res.header("Access-Control-Allow-Origin", "*");
-//  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
 	var id = req.params.id;
 
@@ -66,8 +66,8 @@ app.get('/radar/:id', function (req,res) {
 
 app.get('/radars', function (req,res) {
 
-// res.header("Access-Control-Allow-Origin", "*");
-//  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+ res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
         
 //connection.connect();
@@ -92,8 +92,8 @@ app.get('/radars', function (req,res) {
 
 app.get('/accidents', function (req,res) {
 
-// res.header("Access-Control-Allow-Origin", "*");
-//  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+ res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
        
   //      connection.connect();
