@@ -10,11 +10,12 @@ console.log(authParts[0]);
 console.log(authParts[1]);
 console.log(myURL.hostname);
 console.log(myURL.pathname.substring(1));
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
   host: myURL.hostname,
   user: authParts[0],
   password: authParts[1] ,
-  database : myURL.pathname.substring(1)
+  database : myURL.pathname.substring(1),
+  connectionLimit : 10
 });
 
 
