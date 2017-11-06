@@ -14,17 +14,12 @@ var connection = mysql.createConnection({
   host: myURL.hostname,
   user: authParts[0],
   password: authParts[1] ,
-  database : myURL.pathname.substring(1)
+  database : myURL.pathname.substring(1),
+  connectionLimit : 10
 });
 
 
 
-try {
-	connection.connect();
-	
-} catch(e) {
-	console.log('Database Connetion failed:' + e);
-}
 
 var app = express();
 app.use(parser.json());
@@ -42,11 +37,14 @@ app.get('/radar/:id', function (req,res) {
    console.log(myURL.username);
    console.log(myURL.password);
    console.log(myURL.pathname.substring(1));*/
- res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
 	var id = req.params.id;
+
+connection.connect();
  
+
 	connection.query('select s.id,s.time,s.flow,s.density,IFNULL(c.lat,0) accident_ind,IFNULL(c.response_time,-1) response_time ,IFNULL(c.turn_around_time,-1) turn_around_time from speed_vol_agg s left outer join collisions c on (c.date=s.date and s.id=c.radar_id and c.time=s.time) where s.id=? order by 1,2', [id], function(err, rows, fields) {
   		if (!err){
   			var response = [];
@@ -56,8 +54,9 @@ app.get('/radar/:id', function (req,res) {
 			} else {
 				response.push({'result' : 'error', 'msg' : 'No Results Found'});
 			}
- 
+                        connection.end();
 			res.setHeader('Content-Type', 'application/json');
+                        
 	    	res.status(200).send(JSON.stringify(response));
   		} else {
 		    res.status(400).send(err);
