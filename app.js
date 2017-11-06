@@ -37,8 +37,8 @@ app.get('/radar/:id', function (req,res) {
    console.log(myURL.username);
    console.log(myURL.password);
    console.log(myURL.pathname.substring(1));*/
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//  res.header("Access-Control-Allow-Origin", "*");
+//  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
 	var id = req.params.id;
 
@@ -70,7 +70,7 @@ app.get('/radars', function (req,res) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
         
-
+connection.connect();
         connection.query('select radarname,lat, lng from radar', [], function(err, rows, fields) {
                 if (!err){
                         var response = [];
@@ -80,7 +80,7 @@ app.get('/radars', function (req,res) {
                         } else {
                                 response.push({'result' : 'error', 'msg' : 'No Results Found'});
                         }
-
+                        connection.end();
                         res.setHeader('Content-Type', 'application/json');
                 res.status(200).send(JSON.stringify(response));
                 } else {
@@ -96,7 +96,7 @@ app.get('/accidents', function (req,res) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
        
-
+        connection.connect();
         connection.query('select timestep start_time ,lat,lng,radar_id,SEC_TO_TIME(FLOOR((TIME_TO_SEC(SEC_TO_TIME((TIME_TO_SEC(timestep)+ TIME_TO_SEC(TURN_AROUND_TIME))))+150)/300)*300) end_time,response_time,turn_around_time from collisions', [], function(err, rows, fields) {
                 if (!err){
                         var response = [];
@@ -106,7 +106,7 @@ app.get('/accidents', function (req,res) {
                         } else {
                                 response.push({'result' : 'error', 'msg' : 'No Results Found'});
                         }
-
+                         connection.end();
                         res.setHeader('Content-Type', 'application/json');
                 res.status(200).send(JSON.stringify(response));
                 } else {
