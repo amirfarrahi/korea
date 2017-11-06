@@ -14,8 +14,7 @@ var connection = mysql.createConnection({
   host: myURL.hostname,
   user: authParts[0],
   password: authParts[1] ,
-  database : myURL.pathname.substring(1),
-  connectionLimit : 10
+  database : myURL.pathname.substring(1)
 });
 
 
