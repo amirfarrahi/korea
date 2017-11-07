@@ -97,7 +97,7 @@ app.get('/accidents', function (req,res) {
 
        
   //      connection.connect();
-        connection.query('select timestep start_time ,lat,lng,radar_id,SEC_TO_TIME(FLOOR((TIME_TO_SEC(SEC_TO_TIME((TIME_TO_SEC(timestep)+ TIME_TO_SEC(TURN_AROUND_TIME))))+150)/300)*300) end_time,response_time,turn_around_time from collisions', [], function(err, rows, fields) {
+        connection.query('select c.timestep start_time ,c.lat,c.lng,c.radar_id, SEC_TO_TIME(FLOOR((TIME_TO_SEC(SEC_TO_TIME((TIME_TO_SEC(c.timestep)+ TIME_TO_SEC(c.TURN_AROUND_TIME))))+150)/300)*300) end_time,c.response_time,c.turn_around_time ,rl.lat,rl.lng from collisions c inner join radar rl on ( rl.radarname=c.radar_id)', [], function(err, rows, fields) {
                 if (!err){
                         var response = [];
 
