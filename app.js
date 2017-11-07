@@ -45,7 +45,7 @@ app.get('/radar/:id', function (req,res) {
 //connection.connect();
  
 
-	connection.query('select s.id,s.time,s.flow,s.density,IFNULL(c.lat,0) accident_ind,IFNULL(c.response_time,-1) response_time ,IFNULL(c.turn_around_time,-1) turn_around_time from speed_vol_agg s left outer join collisions c on (c.date=s.date and s.id=c.radar_id and c.time=s.time) where s.id=? order by 1,2', [id], function(err, rows, fields) {
+	connection.query('select r.lat radar_lat,r.lng radar_lng, s.id,s.time,s.flow,s.density,IFNULL(c.lat,0) accident_ind,IFNULL(c.response_time,-1) response_time ,IFNULL(c.turn_around_time,-1) turn_around_time from speed_vol_agg s inner join radar r on (r.radarname=s.id) left outer join collisions c on (c.date=s.date and s.id=c.radar_id and c.time=s.time) where s.id=? order by 1,2', [id], function(err, rows, fields) {
   		if (!err){
   			var response = [];
  
